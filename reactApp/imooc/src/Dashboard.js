@@ -38,7 +38,6 @@ class Dashboard extends React.Component {
                 <Route path={`${ match.path }/qibinglian`} component={Qibinglian}></Route>
             </div>
         )
-        console.log(this.props)
         return this.props.isAuth ? app : redirectToLogin
     }
 }

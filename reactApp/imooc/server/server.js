@@ -18,16 +18,16 @@ User.update({user:'Yuhaiyue'},{'$set':{age:88}},function(err, doc){
 })
 
 //创建数据
-// User.create({
-//     user:"Yuhaiyue",
-//     age:18
-// },function(err, doc){
-//     if (!err) {
-//         console.log(doc)
-//     } else {
-//         console.log(err)
-//     }
-// })
+User.create({
+    user:"Yuhaiyue",
+    age:18
+},function(err, doc){
+    if (!err) {
+        console.log(doc)
+    } else {
+        console.log(err)
+    }
+})
 
 //新建app
 const app = express();
