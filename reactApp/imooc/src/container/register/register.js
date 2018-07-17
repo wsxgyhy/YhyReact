@@ -24,10 +24,10 @@ class Register extends React.Component {
 
     }
     RadioChange(type) {
-        this.setState({
-            ...this.state,
-            type:type
-        })
+        // this.setState({
+        //     ...this.state,
+        //     type:type
+        // })
     }
     render () {
         return (
