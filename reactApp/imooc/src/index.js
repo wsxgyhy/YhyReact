@@ -10,6 +10,8 @@ import {
     Switch
 } from 'react-router-dom'
 import reducers from './reducer'
+import Login from './container/login/login'
+import Register from './container/register/register'
 
 const store = createStore(reducers,compose(
         applyMiddleware(thunk),
@@ -19,7 +21,10 @@ const store = createStore(reducers,compose(
 ReactDom.render(
     (<Provider store={store}>
         <BrowserRouter>
-            
+            <Switch>
+                <Route path="/login" exact component={Login}></Route>
+                <Route path="/register" exact component={Register}></Route>
+            </Switch>
         </BrowserRouter>
     </Provider>)
      ,document.getElementById('root')
