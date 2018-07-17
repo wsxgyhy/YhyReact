@@ -40,6 +40,7 @@ class Login extends React.Component {
                             clear
                             type="password"
                             placeholder="请输入密码"
+                            maxLength="20"
                         >密码</InputItem>
                     </List>
                     <WhiteSpace/>

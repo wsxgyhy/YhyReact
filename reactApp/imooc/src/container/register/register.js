@@ -8,26 +8,35 @@ import {
     WhiteSpace,
     Radio
 } from 'antd-mobile'
+import { connect } from 'react-redux'
+import {register} from '../../redux/user.redux'
+
 
 const RadioItem = Radio.RadioItem;
-
+@connect(
+    state=>state.user,
+    {register}
+)
 class Register extends React.Component {
     constructor (props) {
         super(props);
         this.register = this.register.bind(this);
-        this.RadioChange = this.RadioChange.bind(this)
         this.state = {
+            user:'',
+            psw:'',
+            repeatPsw:'',
             type:"genius" //或者boss
         }
+        
     }
     register () {
-
+        console.log(this.state)
+        this.props.register(this.state)
     }
-    RadioChange(type) {
-        // this.setState({
-        //     ...this.state,
-        //     type:type
-        // })
+    handleChange (key, value) {
+        this.setState({
+            [key]:value
+        })
     }
     render () {
         return (
@@ -38,34 +47,51 @@ class Register extends React.Component {
                     <List>
                         <InputItem
                             clear
-                            type="phone"
-                            placeholder="请输入手机号"
-                            
-                        >手机号</InputItem>
+                            placeholder="请输入用户名"
+                            onChange = {(v) => this.handleChange('user',v)}
+                        >
+                            用户名
+                        </InputItem>
                     </List>
                     <WhiteSpace/>
                     <List>
                         <InputItem
                             clear
-                            type="password"
                             placeholder="请输入密码"
-                        >密码</InputItem>
+                            onChange = {(v) => this.handleChange('psw',v)}
+                            maxLength = "20"
+                        >
+                            密码
+                        </InputItem>
                     </List>
                     <WhiteSpace/>
                     <List>
                         <InputItem
                             clear
-                            type="password"
-                            placeholder="请输入密码"
-                        >确认密码</InputItem>
+                            placeholder="请确认密码"
+                            onChange = {(v) => this.handleChange('repeatPsw',v)}
+                            maxLength = "20"
+                        >
+                            确认密码
+                        </InputItem>
                     </List>
                     <WhiteSpace/>
-                        <RadioItem checked = {this.state.type === "genius"} onChange = {this.RadioChange("genius")}>
+                    <List>
+                        <RadioItem 
+                            checked = {this.state.type === "genius"} 
+                            onChange = {(v) => this.handleChange('type',"genius")}
+                            key = 'genius'
+                        >
                             牛人
                         </RadioItem>
-                        <RadioItem checked = {this.state.type != "genius"} onChange = {this.RadioChange("boss")}>
+                        <RadioItem 
+                            checked = {this.state.type !== "genius"}
+                            onChange = {(v) => this.handleChange('type',"boss")}
+                            key = 'boss'
+                        >
                             Boss
                         </RadioItem>
+                    </List>
                     <WhiteSpace/>
                     <Button type="primary" onClick={this.register}>注册</Button>
                 </WingBlank>
