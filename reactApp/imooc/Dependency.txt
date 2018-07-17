@@ -1,0 +1,12 @@
+1.按需加载    babel-plugin-import    对应配置在package里面，babel=》plugin=》import
+3.使项目中可直接使用@修饰符    transform-decorators-legacy    在package中  babel=》plugin进行配置
+2.代理配置    在package里面直接proxy配置
+4.处理cookie  cookie-parser
+5.数据管理    redux
+6.redux异步处理  thunk
+7.react与redux结合   react-redux
+8.react路由  react-router-dom（此为react-router4 为web应该设立的router，非rn）
+9.http请求   axios
+10.react脚手架  create-react-app  安装需全局
+11.node后端   express
+

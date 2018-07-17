@@ -10,8 +10,6 @@ import {
     Switch
 } from 'react-router-dom'
 import reducers from './reducer'
-import Auth from './Auth'
-import Dashboard from './Dashboard'
 
 const store = createStore(reducers,compose(
         applyMiddleware(thunk),
@@ -21,11 +19,7 @@ const store = createStore(reducers,compose(
 ReactDom.render(
     (<Provider store={store}>
         <BrowserRouter>
-            <Switch>
-                <Route path="/dashboard" component={Dashboard}></Route>
-                <Route path="/login" component={Auth}></Route>
-                <Redirect to="/dashboard"></Redirect>
-            </Switch>
+            
         </BrowserRouter>
     </Provider>)
      ,document.getElementById('root')
