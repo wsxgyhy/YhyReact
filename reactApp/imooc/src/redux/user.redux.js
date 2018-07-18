@@ -5,6 +5,7 @@ import { getRedirectPath } from '../util'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 const ERROR_MSG = 'ERROR_MSG'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+const LOAD_DATA = 'LOAD_DATA'
 
 const initState = {
     redirectTo:'',
@@ -17,6 +18,8 @@ const initState = {
 //reducer
 export function user(state = initState, action) {
     switch (action.type) {
+        case LOAD_DATA :
+            return {...state, ...action.payload}
         case REGISTER_SUCCESS :
             return {...state, isAuth:true ,...action.payload, redirectTo:getRedirectPath(action.payload),msg:''};
         case ERROR_MSG:
@@ -38,6 +41,10 @@ function loginSuccess(data) {
 
 function errorMsg( msg ) {
     return {msg, type:ERROR_MSG}
+}
+
+export function loadData (data) {
+    return {payload:data, type:LOAD_DATA}
 }
 
 export function register({user, psw, repeatPsw, type}) {
@@ -72,7 +79,7 @@ export function login({user, psw}) {
         .then(res => {
             if (res.status === 200 && res.data.code === 0) {
                 Toast.info('登陆成功',2)
-                dispatch(loginSuccess({user,psw}))
+                dispatch(loginSuccess({user,psw,type:res.data.data.type}))
             } else {
                 Toast.info(res.data.msg,2)
                 dispatch(errorMsg(res.data.msg))

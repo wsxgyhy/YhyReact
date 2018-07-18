@@ -1,7 +1,13 @@
 import React from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { loadData } from '../../redux/user.redux'
 @withRouter
+@connect(
+    null,
+    {loadData}
+)
 class AuthRoute extends React.Component {
     componentDidMount() {
         const pathList = ['/login', '/register'];
@@ -16,6 +22,7 @@ class AuthRoute extends React.Component {
                 if (res.data.code === 0) {
 
                 } else {
+                    this.props.loadData(res.data.data)
                     this.props.history.push('/login')
                 }
             }
