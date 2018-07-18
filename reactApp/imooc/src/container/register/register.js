@@ -9,18 +9,20 @@ import {
     Radio
 } from 'antd-mobile'
 import { connect } from 'react-redux'
-import {register} from '../../redux/user.redux'
+import { Redirect } from 'react-router-dom'
+import {register, verifyUserName} from '../../redux/user.redux'
 
 
 const RadioItem = Radio.RadioItem;
 @connect(
     state=>state.user,
-    {register}
+    {register, verifyUserName}
 )
 class Register extends React.Component {
     constructor (props) {
         super(props);
         this.register = this.register.bind(this);
+        this.verifyName = this.verifyName.bind(this);
         this.state = {
             user:'',
             psw:'',
@@ -38,9 +40,15 @@ class Register extends React.Component {
             [key]:value
         })
     }
+    verifyName () {
+        if (this.state.user) {
+            this.props.verifyUserName(this.state.user)
+        }
+    }
     render () {
         return (
             <div>
+                { this.props.redirectTo ? <Redirect to={this.props.redirectTo}></Redirect> : null }
                 <Logo></Logo>
                 <h2>注册页</h2>
                 <WingBlank>
@@ -49,6 +57,7 @@ class Register extends React.Component {
                             clear
                             placeholder="请输入用户名"
                             onChange = {(v) => this.handleChange('user',v)}
+                            onBlur = {this.verifyName}
                         >
                             用户名
                         </InputItem>

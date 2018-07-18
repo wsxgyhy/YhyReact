@@ -7,32 +7,50 @@ import {
     WingBlank, 
     WhiteSpace
 } from 'antd-mobile'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { login } from '../../redux/user.redux'
 
+
+@connect(
+    state => state.user,
+    {login}
+)
 class Login extends React.Component {
     constructor (props) {
         super(props)
         this.register = this.register.bind(this)
         this.login = this.login.bind(this)
+        this.state = {
+            user:'',
+            psw:''
+        }
     }
     register () {
         this.props.history.push('/register')
     }
     login(){
-
+        this.props.login(this.state)
+        console.log(this.state)
+    }
+    changeValue (key, value) {
+        this.setState({
+            [key]:value
+        })
     }
     render () {
         return (
             <div>
+                {this.props.redirectTo ? <Redirect to={this.props.redirectTo}></Redirect> : null}
                 <Logo></Logo>
                 <h2>登陆页</h2>
                 <WingBlank>
                     <List>
                         <InputItem
                             clear
-                            type="phone"
-                            placeholder="请输入手机号"
-                            
-                        >手机号</InputItem>
+                            placeholder="用户名"
+                            onChange = {(v) => this.changeValue('user', v)}
+                        >用户名</InputItem>
                     </List>
                     <WhiteSpace/>
                     <List>
@@ -41,6 +59,7 @@ class Login extends React.Component {
                             type="password"
                             placeholder="请输入密码"
                             maxLength="20"
+                            onChange = {(v) => this.changeValue('psw', v)}
                         >密码</InputItem>
                     </List>
                     <WhiteSpace/>
