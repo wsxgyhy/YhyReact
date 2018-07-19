@@ -11,8 +11,10 @@ import {
 } from 'react-router-dom'
 import reducers from './reducer'
 import Login from './container/login/login'
+import BossInfo from './container/bossinfo/bossinfo'
 import Register from './container/register/register'
-import AuthRoute from './component/authRoute/authRoute';
+import AuthRoute from './component/authRoute/authRoute'
+
 
 const store = createStore(reducers,compose(
         applyMiddleware(thunk),
@@ -24,6 +26,7 @@ ReactDom.render(
         <BrowserRouter>
             <div>
                 <AuthRoute></AuthRoute>
+                <Route path="/bossinfo" component={BossInfo}></Route>
                 <Route path="/login" exact component={Login}></Route>
                 <Route path="/register" exact component={Register}></Route>
             </div>
