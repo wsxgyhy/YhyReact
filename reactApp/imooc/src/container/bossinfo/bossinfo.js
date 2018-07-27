@@ -49,3 +49,13 @@ class BossInfo extends React.Component {
     }
 }
 export default BossInfo
+
+const nameChange = (aaa) => {
+    
+    let obj = {
+        
+    }
+
+}
+nameChange('xiaoming')
+

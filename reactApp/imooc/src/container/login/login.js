@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { login } from '../../redux/user.redux'
+import { ModalComponent } from '../../../node_modules/antd-mobile/lib/modal/Modal';
 
 
 @connect(
@@ -34,6 +35,7 @@ class Login extends React.Component {
         console.log(this.state)
     }
     changeValue (key, value) {
+        
         this.setState({
             [key]:value
         })
